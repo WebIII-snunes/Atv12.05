@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="h-full">
+
+<head>
+    <title>Lista de Livros</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="h-full">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Lista de Livros</h1>
+
+        <nav class="mb-6">
+            <a th:href="@{/emprestimos}" class="text-blue-500 hover:underline">Listagem de Empréstimos</a>
+            <span class="mx-2 text-gray-500">|</span>
+            <a th:href="@{/livros}" class="text-blue-500 hover:underline">Listagem de Livros</a>
+            <span class="mx-2 text-gray-500">|</span>
+            <a th:href="@{/usuarios}" class="text-blue-500 hover:underline">Listagem de Usuários</a>
+
+            <a th:href="@{/livros/novo}" class="float-right bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Livro</a>
+        </nav>
+
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="px-4 py-2 text-left text-gray-700">Título</th>
+                    <th class="px-4 py-2 text-left text-gray-700">Autor</th>
+                    <th class="px-4 py-2 text-left text-gray-700">Disponibilidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="l : ${livros}" class="border-b last:border-none">
+                    <td class="px-4 py-2 text-gray-700" th:text="${l.titulo}">Título</td>
+                    <td class="px-4 py-2 text-gray-600" th:text="${l.autor}">Autor</td>
+                    <td class="px-4 py-2" th:classappend="${l.disponivel} ? 'text-gray-600' : 'text-red-600'"
+                        th:text="${l.disponivel} ? 'Disponível' : 'Indisponível'">Status</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
